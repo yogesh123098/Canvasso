@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.welcome {
+  font-size: 30px;
+  text-align: center;
+  transition: all 200ms ease;
+}
+
+canvas {
+  /* background-color: red; */
+}
