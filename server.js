@@ -27,8 +27,14 @@ js.on("connection", (socket) => {
 //variables
 let connections = 0;
 let roomNo = 1;
+
+io.configure(function () {
+  io.set("transports", ["xhr-polling"]);
+  io.set("polling duration", 10);
+});
 /////////////////////
 // custom namespace
+
 io.on("connection", function (socket) {
   console.log("A user connected");
 
@@ -107,7 +113,7 @@ io.on("connection", function (socket) {
 
 ///////////////////////
 // starting the server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 http.listen(PORT, function () {
   console.log(`listening on PORT ${PORT}`);
