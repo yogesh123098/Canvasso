@@ -28,10 +28,10 @@ js.on("connection", (socket) => {
 let connections = 0;
 let roomNo = 1;
 
-io.configure(function () {
-  io.set("transports", ["xhr-polling"]);
-  io.set("polling duration", 10);
-});
+// io.configure(function () {
+//   io.set("transports", ["xhr-polling"]);
+//   io.set("polling duration", 10);
+// });
 /////////////////////
 // custom namespace
 
@@ -113,7 +113,7 @@ io.on("connection", function (socket) {
 
 ///////////////////////
 // starting the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || process.argv[2] || 4000;
 
 http.listen(PORT, function () {
   console.log(`listening on PORT ${PORT}`);

@@ -33,7 +33,6 @@ window.addEventListener("load", () => {
       ctx.beginPath();
     });
     drawing = false;
-    // welcome.style.opacity = 1;
     ctx.beginPath();
   };
 
@@ -55,7 +54,6 @@ window.addEventListener("load", () => {
     socket.emit("drawing", options);
 
     socket.on("drawing", (data) => {
-      console.log(data);
       ctx.strokeStyle = data.color;
       ctx.lineWidth = 5;
       ctx.lineCap = "round";
