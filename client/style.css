@@ -13,3 +13,7 @@
 canvas {
   /* background-color: red; */
 }
+
+.status {
+  position: absolute;
+}
