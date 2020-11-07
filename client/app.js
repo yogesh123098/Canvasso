@@ -1,23 +1,60 @@
 console.log("Hi");
 // const welcome = document.querySelector(".welcome");
-
 const randomRoomGen = (roomList) => {
   const random = Math.floor(Math.random() * roomList.length);
   return random;
 };
 
-const colors = ["red", "purple", "yellow", "lime", "black"];
-const index = randomRoomGen(colors);
-const color = colors[index];
-console.log(color);
+// const colors = ["purple", "red", "yellow", "lime", "black"];
+// const index = randomRoomGen(colors);
+// let color = colors[index];
+// console.log(color);
 
 window.addEventListener("load", () => {
-  console.log("starting");
+  let cursor = "pencil";
+  let color = "black";
+  let activeColor = color;
+
   const canvas = document.querySelector("canvas");
   const ctx = canvas.getContext("2d");
 
-  canvas.height = 0.9 * window.innerHeight;
+  const eraser = document.querySelector(".eraser");
+  const pencil = document.querySelector(".pencil");
+  const brushSize = document.querySelector("#brush-size");
+  const colorPicker = document.querySelector(".color");
+
+  // console.log("Brush" + "=" + brushSize.value);
+  let brushStroke = brushSize.value;
+
+  brushSize.addEventListener("change", (e) => (brushStroke = e.target.value));
+
+  // console.log(color);
+
+  colorPicker.addEventListener("change", (e) => {
+    activeColor = e.target.value;
+    color = e.target.value;
+    console.log("target = " + e.target.value);
+  });
+
+  eraser.addEventListener("click", () => {
+    eraser.style.color = "white";
+    pencil.style.color = "black";
+    cursor = "eraser";
+    color = "#444444";
+    console.log(color);
+  });
+
+  pencil.addEventListener("click", () => {
+    pencil.style.color = "white";
+    eraser.style.color = "black";
+    cursor = "pencil";
+    color = activeColor;
+    console.log(color);
+  });
+
+  canvas.height = window.innerHeight;
   canvas.width = window.innerWidth;
+  console.log(color);
 
   let drawing = false;
 
@@ -41,7 +78,7 @@ window.addEventListener("load", () => {
 
     ctx.strokeStyle = color;
 
-    ctx.lineWidth = 5;
+    ctx.lineWidth = brushStroke;
     ctx.lineCap = "round";
     ctx.lineTo(e.clientX, e.clientY);
     ctx.stroke();
