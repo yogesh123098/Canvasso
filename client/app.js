@@ -17,6 +17,7 @@ window.addEventListener("load", () => {
 
   const canvas = document.querySelector("canvas");
   const ctx = canvas.getContext("2d");
+  const ctx2 = canvas.getContext("2d");
 
   const eraser = document.querySelector(".eraser");
   const pencil = document.querySelector(".pencil");
@@ -91,13 +92,13 @@ window.addEventListener("load", () => {
     socket.emit("drawing", options);
 
     socket.on("drawing", (data) => {
-      ctx.strokeStyle = data.color;
-      ctx.lineWidth = 5;
-      ctx.lineCap = "round";
-      ctx.lineTo(data.path.x, data.path.y);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(data.path.x, data.path.y);
+      ctx2.strokeStyle = data.color;
+      ctx2.lineWidth = 5;
+      ctx2.lineCap = "round";
+      ctx2.lineTo(data.path.x, data.path.y);
+      ctx2.stroke();
+      ctx2.beginPath();
+      ctx2.moveTo(data.path.x, data.path.y);
     });
 
     ctx.beginPath();
