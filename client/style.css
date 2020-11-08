@@ -92,3 +92,16 @@ i {
   bottom: 20px;
   left: 20px;
 }
+
+.updates {
+  position: absolute;
+  top: 0;
+}
+
+.name {
+  color: white;
+}
+
+.who-joined {
+  color: white;
+}

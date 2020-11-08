@@ -112,9 +112,10 @@ io.on("connection", function (socket) {
   const greet = (data) => {
     console.log(data);
 
-    io.sockets.emit("start", { message: "" }); // reply to all
+    // io.sockets.emit("start", { message: "" }); // reply to all
 
-    socket.broadcast.emit("start", {
+    socket.broadcast.emit("who-joined", {
+      name: data.name,
       message: `${data.name} has joined! say Hi.`,
     }); // reply to all but the sender
 

@@ -1,16 +1,21 @@
 console.log(socket);
 
+const nameUser = document.querySelector(".name");
+const update = document.querySelector(".who-joined");
+const username = window.prompt("Enter your name");
+
 const start = (data) => {
-  console.log(data);
-  //   window.alert(data.message);
+  // console.log(data);
+  update.innerHTML = `${data.name} has Joined`;
+  window.setTimeout(() => {
+    update.innerHTML = "";
+  }, 2000);
 };
 
-socket.on("start", start); // start bhanne event fire bhayo bhane start bhanne function execute garnu
+socket.on("who-joined", start); // start bhanne event fire bhayo bhane start bhanne function execute garnu
 
-const joined = () => {
-  return;
-};
-
-const dataToSend = { name: "Yogesh", desc: "random desc" };
+const dataToSend = { name: username };
 
 socket.emit("joined", dataToSend);
+
+nameUser.innerHTML = username;
