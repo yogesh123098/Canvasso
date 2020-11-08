@@ -84,6 +84,7 @@ canvas[resize] {
 i {
   color: white;
   font-size: 30px;
+  cursor: grab;
 }
 
 .theme {

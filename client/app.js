@@ -1,4 +1,5 @@
 console.log("Hi");
+
 // const welcome = document.querySelector(".welcome");
 const randomRoomGen = (roomList) => {
   const random = Math.floor(Math.random() * roomList.length);
@@ -19,8 +20,8 @@ window.addEventListener("load", () => {
   const ctx = canvas.getContext("2d");
   const ctx2 = canvas.getContext("2d");
 
-  const eraser = document.querySelector(".eraser");
-  const pencil = document.querySelector(".pencil");
+  const eraser = document.querySelector(".eraser-tool");
+  const pencil = document.querySelector(".pencil-tool");
   const brushSize = document.querySelector("#brush-size");
   const colorPicker = document.querySelector(".color");
 
@@ -38,16 +39,17 @@ window.addEventListener("load", () => {
   });
 
   eraser.addEventListener("click", () => {
-    eraser.style.color = "white";
-    pencil.style.color = "black";
+    eraser.style.color = "grey";
+    pencil.style.color = "white";
     cursor = "eraser";
     color = "#444444";
-    console.log(color);
+    console.log(eraser);
   });
 
   pencil.addEventListener("click", () => {
-    pencil.style.color = "white";
-    eraser.style.color = "black";
+    pencil.style.color = "grey";
+    eraser.style.color = "white";
+    console.log(eraser);
     cursor = "pencil";
     color = activeColor;
     console.log(color);
@@ -66,10 +68,13 @@ window.addEventListener("load", () => {
   };
 
   const end = () => {
-    socket.emit("end", "end");
-    socket.on("end", () => {
-      ctx.beginPath();
+    socket.emit("end", "end"); //
+
+    socket.on("end", (data) => {
+      console.log(data);
+      ctx2.beginPath();
     });
+
     drawing = false;
     ctx.beginPath();
   };
@@ -87,13 +92,14 @@ window.addEventListener("load", () => {
     const options = {
       path: { x: e.clientX, y: e.clientY },
       color: ctx.strokeStyle,
+      size: ctx.lineWidth,
     };
     // console.log(path);
-    socket.emit("drawing", options);
+    socket.emit("drawing", options); // sends data to backend. Send to everyone but the user himself.
 
     socket.on("drawing", (data) => {
       ctx2.strokeStyle = data.color;
-      ctx2.lineWidth = 5;
+      ctx2.lineWidth = data.size;
       ctx2.lineCap = "round";
       ctx2.lineTo(data.path.x, data.path.y);
       ctx2.stroke();

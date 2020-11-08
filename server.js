@@ -86,7 +86,7 @@ io.on("connection", function (socket) {
   //////////////////
   // canvas event
   socket.on("drawing", (data) => {
-    socket.broadcast.emit("drawing", data);
+    socket.broadcast.emit("drawing", data); // reply to all but the sender
     console.log(data);
   });
 
@@ -108,7 +108,22 @@ io.on("connection", function (socket) {
     connections--;
     console.log("A user disconnected");
   });
+
+  const greet = (data) => {
+    console.log(data);
+
+    io.sockets.emit("start", { message: "" }); // reply to all
+
+    socket.broadcast.emit("start", {
+      message: `${data.name} has joined! say Hi.`,
+    }); // reply to all but the sender
+
+    socket.emit("start", { message: "Welcome to the team" }); // reply to the sender
+  };
+
+  socket.on("joined", greet);
 });
+
 ///////////////////////
 
 ///////////////////////

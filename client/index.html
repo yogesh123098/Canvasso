@@ -14,10 +14,10 @@
     <h3 class="status">No clients Connected</h3>
     <div class="options">
       <div class="eraser">
-        <i class="fas fa-eraser tool"></i>
+        <i class="fas fa-eraser tool eraser-tool"></i>
       </div>
       <div class="pencil">
-        <i class="fas fa-pencil-alt tool"></i>
+        <i class="fas fa-pencil-alt tool pencil-tool"></i>
       </div>
       <div class="brush-size">
         <label for="brush-size"><div class="black-dot tool"></div></label>
@@ -35,7 +35,7 @@
       <input type="color" name="color" id="color" class="color" />
     </div>
 
-    <div class="theme">
+    <!-- <div class="theme">
       <div class="svg">
         <svg
           id="darkmode"
@@ -52,17 +52,29 @@
           />
         </svg>
       </div>
-    </div>
+    </div> -->
     <canvas></canvas>
     <script
       src="https://kit.fontawesome.com/30938c982c.js"
       crossorigin="anonymous"
     ></script>
-    <script src="./anime.min.js"></script>
+    <!-- <script src="./anime.min.js"></script> -->
+    <!-- Animation library-->
     <script src="/socket.io/socket.io.js"></script>
+    <!-- Server serves a socket file and we link it here -->
+
     <script src="./app.js"></script>
+    <!-- The main frontend code -->
+
     <script src="./socket.js"></script>
-    <script src="./history.js"></script>
-    <script src="./darkmode.js"></script>
+    <!-- for successful connection -->
+
+    <script src="./learn.js"></script>
+    <!-- for practice -->
+
+    <!-- <script src="./history.js"></script> -->
+    <!-- unused -->
+    <!-- <script src="./darkmode.js"></script> -->
+    <!-- for theme and animation -->
   </body>
 </html>
